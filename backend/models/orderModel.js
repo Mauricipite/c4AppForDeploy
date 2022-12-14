@@ -18,9 +18,15 @@ const orderSchema = mongoose.Schema({
     endDate: {
         type: Date,
         required: [true, 'Please add an end-date']
+    },
+    completed:{
+        type:Boolean,
+        default: false
     }
 }, {
     timestamps: true
 })
 
 module.exports = mongoose.model('Order', orderSchema)
+
+// user, computer, startDate, endDate, completed

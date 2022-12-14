@@ -5,14 +5,19 @@ const {
     insertComputers, 
     updateComputer, 
     deleteComputer,
+    getAvailableComputers,
 } = require('../controllers/computerController')
+const {protect} = require('../middleware/authMiddleware')
 
-router.get('/', getComputers)
+router.get('/', protect, getComputers)
 
-router.post('/', insertComputers)
+router.get('/inventory', protect, getAvailableComputers)
 
-router.put('/:id', updateComputer)
+router.post('/', protect, insertComputers)
 
-router.delete('/:id', deleteComputer)
+router.put('/:id', protect, updateComputer)
+
+router.delete('/:id', protect, deleteComputer)
+
 
 module.exports = router
