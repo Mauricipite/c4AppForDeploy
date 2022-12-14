@@ -26,6 +26,10 @@ const userSchema = mongoose.Schema({
     address:{
         type:String,
         required: [true, 'Please add an address']
+    },
+    admin: {
+        type: Boolean,
+        default: false
     }
 },{
     timestamps: true

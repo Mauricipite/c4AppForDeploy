@@ -24,7 +24,7 @@ const computerSchema = mongoose.Schema({
     },
     availability:{
         type:Boolean,
-        required: [true, 'Please say if it is available']
+        default: true
     }
 },{
     timestamps: true

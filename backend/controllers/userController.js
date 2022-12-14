@@ -7,7 +7,7 @@ const User = require('../models/userModel')
 // @route POST /api/users
 // @access Public
 const registerUser = asyncHandler( async (req, res) => {
-    const { name, email, password, phoneNumber, identification, address } = req.body
+    const { name, email, password, phoneNumber, identification, address, admin } = req.body
 
     if (!name || !email || !password || !phoneNumber || !identification || !address) {
         res.status(400)
@@ -33,7 +33,8 @@ const registerUser = asyncHandler( async (req, res) => {
         phoneNumber,
         identification,
         address,
-        password:hashedPassword
+        password:hashedPassword,
+        admin
     })
 
     if (user) {
@@ -88,6 +89,71 @@ const getMe = asyncHandler( async (req, res) => {
     })
 })
 
+// @desc Update a user
+// @route PUT /api/login/:id
+// @access Private - only user itself and admins can do it
+const updateUser = asyncHandler(async (req, res) => {
+    
+    //locate user to update by req on params/query
+    const userToUpdate = await User.findById(req.params.id)
+
+    //validate that we got a user
+    if(!userToUpdate){
+        res.status(400)
+        throw new Error('User not found')
+    }
+
+    //get the user that is currently logged in by params/BEARER token
+    const loggedUser = await User.findById(req.user.id)
+
+    //Check for loggedUser
+    if(!loggedUser){
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    //make sure that only logged-in user can update itself, or that an admin can do it
+    if(userToUpdate.id == loggedUser.id || loggedUser.admin == true){
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body)
+        res.status(200).json(updatedUser)
+    }
+})
+
+// @desc Delete a user
+// @route DELETE /api/login/:id
+// @access Private/Admins only
+const deleteUser = asyncHandler(async (req, res) => {
+    //locate user to delete by req on params/query
+    const userToDelete = await User.findById(req.params.id)
+
+    //validate that we got a user
+    if(!userToDelete){
+        res.status(400)
+        throw new Error('User not found')
+    }
+
+    //get the user that is currently logged in by params/BEARER token
+    const loggedUser = await User.findById(req.user.id)
+
+    //Check for loggedUser
+    if(!loggedUser){
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    //Check that the logged user is an admin
+    if(loggedUser.admin !== true){
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+
+    //if, and only if it is an admin, then...
+    await userToDelete.remove()
+
+    res.status(200).json({ id: req.params.id })
+})
+
+
 //Generate a JWT
 const generateToken = (id) => {
     return jwt.sign({id}, process.env.JWT_SECRET, {
@@ -99,4 +165,6 @@ module.exports = {
     registerUser,
     loginUser,
     getMe,
+    updateUser,
+    deleteUser,
 }
