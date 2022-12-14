@@ -25,7 +25,7 @@ const userSchema = mongoose.Schema({
     },
     address:{
         type:String,
-        required: [true, 'Please add an ID']
+        required: [true, 'Please add an address']
     }
 },{
     timestamps: true
