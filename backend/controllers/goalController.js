@@ -39,16 +39,16 @@ const updateGoal = asyncHandler( async (req, res) => {
         throw new Error('Goal Not Found')
     }
 
-    const user = await User.findById(req.user.id)
+    // const user = await User.findById(req.user.id)
 
     //Check for user
-    if(!user){
+    if(!req.user){
         res.status(401)
         throw new Error('User not found')
     }
 
     //Make sure the logged-in user matches the especific goal's user
-    if(goal.user.toString() !== user.id) {
+    if(goal.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -71,16 +71,16 @@ const deleteGoal = asyncHandler( async (req, res) => {
         throw new Error('Goal Not Found')
     }
 
-    const user = await User.findById(req.user.id)
+    //const user = await User.findById(req.user.id)
 
     //Check for user
-    if(!user){
+    if(!req.user){
         res.status(401)
         throw new Error('User not found')
     }
 
     //Make sure the logged-in user matches the especific goal's user
-    if(goal.user.toString() !== user.id) {
+    if(goal.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }
