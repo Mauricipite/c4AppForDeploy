@@ -33,6 +33,11 @@ function LandingPage() {
         <>
             <section className='container'>
                 <table>
+                <tr>
+                        <td>
+                            <FaLaptopCode size={'8em'}/>
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <div><h1> Alquiler de PCs  </h1></div>

@@ -26,8 +26,17 @@ function Login() {
       toast.error(message)
     }
 
-    if (isSuccess || user) {
-      navigate('/dashboard')
+    // if (isSuccess || user) {
+    //   navigate('/dashboard')
+    // }
+
+    if (isSuccess) {
+      if (user.admin == false) {
+        navigate('/dashboard')
+      }
+      if (user.admin == true) {
+        navigate('/admin')
+      }
     }
 
     dispatch(reset())
