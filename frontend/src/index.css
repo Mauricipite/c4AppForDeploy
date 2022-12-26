@@ -151,6 +151,22 @@ h3 {
   justify-content: center;
 }
 
+.btnot {
+  padding: 10px 20px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: #000;
+  color: lightcoral;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  appearance: button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .btn svg {
   margin-right: 8px;
 }
@@ -191,6 +207,29 @@ h3 {
   animation: spin 1.2s linear infinite;
 }
 
+.content-table {
+ border-collapse: collapse;
+ margin: 25px 0;
+ font-size: 0.9 em;
+ min-width: 400px;
+}
+
+.content-table thead tr {
+  background-color: gray;
+  color: white;
+  text-align: left;
+  font-weight: bold;
+}
+
+.content-table th,
+.content-table td{
+  padding: 12px 15px;
+}
+
+.content-table tbody tr{
+  border-bottom: 1px solid grey;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -213,3 +252,4 @@ h3 {
     font-size: 1.5rem;
   }
 }
+

@@ -1,4 +1,4 @@
-import { FaSignInAlt, FaSignOutAlt, FaUser, FaAccessibleIcon } from 'react-icons/fa'
+import { FaSignInAlt, FaSignOutAlt, FaUser, FaUsers, FaHouseUser, FaCalendarAlt, FaBoxes, FaCalendarPlus } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
@@ -14,40 +14,24 @@ function Header() {
     navigate('/')
   }
 
-  // return (
-  //   <header className='header'>
-  //     <div className='logo'>
-  //       <Link to='/'>GoalSetter</Link>
-  //     </div>
-  //     <ul>
-  //       {user ? (
-  //         <li>
-  //           <button className='btn' onClick={onLogout}>
-  //             <FaSignOutAlt /> Logout
-  //           </button>
-  //         </li>
-  //       ) : (
-  //         <>
-  //           <li>
-  //             <Link to='/login'>
-  //               <FaSignInAlt /> Login
-  //             </Link>
-  //           </li>
-  //           <li>
-  //             <Link to='/register'>
-  //               <FaUser /> Register
-  //             </Link>
-  //           </li>
-  //         </>
-  //       )}
-  //     </ul>
-  //   </header>
-  // )
+  const notYet = () => {
+    navigate('/notyet')
+  }
+
+  const inventory = () => {
+    navigate('/new')
+  }
+
+  const rent = () => {
+    navigate('/rent')
+  }
+
+
 
   return (
     <header className='header'>
       <div className='logo'>
-        <Link to='/'>GoalSetter</Link>
+        <Link to='/'>Pc Rentals</Link>
       </div>
       <ul>
         {
@@ -71,24 +55,57 @@ function Header() {
               return (
                       <>
                         <li>
-                          <button className='btn' onClick={onLogout}>
-                            <FaSignOutAlt /> Logout
+                          <button className='btnot' onClick={notYet}>
+                            <FaUsers /> Users
                           </button>
                         </li>
+
                         <li>
-                          <button className='btn'>
-                            <FaAccessibleIcon /> Admin
+                          <button className='btnot' onClick={notYet}>
+                            <FaCalendarAlt /> Reservations
+                          </button>
+                        </li>
+
+                        <li>
+                          <button className='btn' onClick={inventory}>
+                            <FaBoxes /> Inventory
+                          </button>
+                        </li>
+
+                        <li>
+                          <button className='btn' onClick={onLogout}>
+                            <FaSignOutAlt /> Logout
                           </button>
                         </li>
                       </>
                       )
             if (user.admin == false)
               return (
+                      <>
+                      <li>
+                        <button className='btnot' onClick={notYet}>
+                          <FaHouseUser /> MyProfile
+                        </button>
+                      </li>
+
+                      <li>
+                        <button className='btnot' onClick={notYet}>
+                          <FaCalendarAlt /> MyReservations
+                        </button>
+                      </li>
+
+                      <li>
+                        <button className='btn' onClick={rent}>
+                          <FaCalendarPlus /> Rent a pc
+                        </button>
+                      </li>
+
                       <li>
                         <button className='btn' onClick={onLogout}>
                           <FaSignOutAlt /> Logout
                         </button>
                       </li>
+                      </>
                       )
           })()
         }

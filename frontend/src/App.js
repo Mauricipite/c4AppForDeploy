@@ -7,6 +7,11 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import LandingPage from './pages/LandingPage'
 import AdminDashboard from './pages/AdminDashboard'
+import InventoryForm from './pages/InventoryForm'
+import InventoryForm2 from './pages/InventoryForm2.jsx'
+import UsersInventory from './pages/UsersInventory'
+import NotYet from './pages/NotYet'
+
 
 function App() {
   return (
@@ -20,6 +25,10 @@ function App() {
             <Route path='/admin' element={<AdminDashboard />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Route path='/new' element={<InventoryForm />} />
+            <Route path='/neww' element={<InventoryForm2 />} />
+            <Route path='/rent' element={<UsersInventory />} />
+            <Route path='/notyet' element={<NotYet />} />
           </Routes>
         </div>
       </Router>

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Spinner from '../components/Spinner'
 import { FaLaptopCode } from 'react-icons/fa'
 
-function Dashboard() {
+function NotYet() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -32,8 +32,8 @@ function Dashboard() {
     <>
       <section className='heading'>
         <FaLaptopCode size={'8em'}/>
-        <h1>Welcome {user && user.name}</h1>
-        <p>Explore Our products!</p>
+        <h1>We're sorry {user && user.name}</h1>
+        <p>This part of our side is not ready yet, please come back later</p>
       </section>
       
   
@@ -41,4 +41,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default NotYet
